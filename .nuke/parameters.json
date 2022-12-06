@@ -1,4 +1,5 @@
 {
   "$schema": "./build.schema.json",
-  "Solution": "Example.Package.Registry.sln"
+  "Solution": "Example.Package.Registry.sln",
+  "Configuration" :  "Release"
 }
