@@ -9,9 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.cspr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE54EB08-5F4F-472C-8708-D870635332A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPackTest", "tests\MyPackTest\MyPackTest.csproj", "{ED4BB0DB-527A-4958-B67B-D0DB78A5CD62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPackTest", "tests\MyPackTest\MyPackTest.csproj", "{ED4BB0DB-527A-4958-B67B-D0DB78A5CD62}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{72E27CF3-5F0C-4598-92C6-84054557B3A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{A1FEFE18-7AE9-4E05-918A-1061A41FD7D0}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
+		GitVersion.yml = GitVersion.yml
+		icon.png = icon.png
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

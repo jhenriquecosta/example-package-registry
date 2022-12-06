@@ -1,0 +1,20 @@
+<Project>
+    <PropertyGroup>
+        <Title>MyPack</Title>
+        <Authors>Henrique Costa</Authors>
+        <Description>Configuração do NUKE para GITHUB</Description>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>hello,nuke</PackageTags>
+        <RepositoryUrl>https://github.com/jhenriquecosta/example-package-registry</RepositoryUrl>
+        <PackageProjectUrl>https://orionsistemas.online</PackageProjectUrl>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <RootNamespace>MyPack</RootNamespace>
+        <PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="/">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+</Project>
