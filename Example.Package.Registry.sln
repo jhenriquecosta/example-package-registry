@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE54EB08-5F4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPackTest", "tests\MyPackTest\MyPackTest.csproj", "{ED4BB0DB-527A-4958-B67B-D0DB78A5CD62}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{72E27CF3-5F0C-4598-92C6-84054557B3A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BCB20B9E-3CA5-467D-8E4E-B216676DCB61} = {AE54EB08-5F4F-472C-8708-D870635332A8}
+		{ED4BB0DB-527A-4958-B67B-D0DB78A5CD62} = {72E27CF3-5F0C-4598-92C6-84054557B3A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35A2DF95-B437-4D52-BE6A-745CECFBBADF}
