@@ -8,3 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added CHANGELOG
 - Initial Release of the package
+
+## 1.0.1 / 16/12/2022
+### Fix
+
+## 1.0.2 / 16/12/2022
+### Fix
+- create Token
