@@ -105,10 +105,10 @@ class Build : NukeBuild
          await Console.Out.WriteLineAsync($"GitHub Source Pkg    : {GithubNugetFeed} ");
          await Console.Out.WriteLineAsync($"GitHub Token         : {GitHubActions?.Token} ");     
          await Console.Out.WriteLineAsync($"Root      Dir        : {RootDirectory.ToString()} ");
-         await Console.Out.WriteLineAsync($"Artefacts Dir        : {ArtifactsDirectory.ToString()} ");
-         await Console.Out.WriteLineAsync($"ArtifactsType        : {ArtifactsType.ToString()} ");
-         await Console.Out.WriteLineAsync($"ExcludedArtifactsType: {ExcludedArtifactsType.ToString()} ");        
-         await Console.Out.WriteLineAsync($"GitHub               : { GitHubActions?.Token}");
+         await Console.Out.WriteLineAsync($"Artefacts Dir        : {ArtifactsDirectory?.ToString()} ");
+         await Console.Out.WriteLineAsync($"ArtifactsType        : {ArtifactsType?.ToString()} ");
+         await Console.Out.WriteLineAsync($"ExcludedArtifactsType: {ExcludedArtifactsType?.ToString()} ");        
+         await Console.Out.WriteLineAsync($"GitHub               : {GitHubActions?.Token}");
          await Console.Out.WriteLineAsync($"Branch               : {GitHubActions?.Ref}");
          await Console.Out.WriteLineAsync($"Commit               : {GitHubActions?.Sha}");
         
