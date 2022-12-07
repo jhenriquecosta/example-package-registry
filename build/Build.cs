@@ -69,10 +69,10 @@ class Build : NukeBuild
     readonly string Copyright;
 
     [Parameter("Artifacts Type")]
-    readonly string ArtifactsType;
+    readonly string ArtifactsType = "*.nupkg";
 
     [Parameter("Excluded Artifacts Type")]
-    readonly string ExcludedArtifactsType;
+    readonly string ExcludedArtifactsType =  "*.symbols.nupkg";
 
     [GitVersion]
     readonly GitVersion GitVersion;
@@ -97,7 +97,7 @@ class Build : NukeBuild
     .Description("Configures the build")
     .Executes(async ()=>
     {
-        
+          
          await Console.Out.WriteLineAsync($"Is Release           : {Configuration} ");
          await Console.Out.WriteLineAsync($"Is PullRequest       : {GitHubActions?.IsPullRequest} ");
          await Console.Out.WriteLineAsync($"Is Development       : {GitRepository.IsOnDevelopBranch()}");
@@ -180,11 +180,12 @@ class Build : NukeBuild
                .Where(x => !x.EndsWith(ExcludedArtifactsType))
                .ForEach(x =>
                {
-                   Console.Out.WriteLineAsync($"Package {x.ToString()} to {GithubNugetFeed}");
+                   var GithubSourceUrlPackage = string.IsNullOrEmpty(GithubNugetFeed) ? "https://nuget.pkg.github.com/jhenriquecosta/index.json" : GithubNugetFeed;
+                   Console.Out.WriteLineAsync($"Publishing {x} to {GithubSourceUrlPackage} GITHUB Package...");
                    DotNetNuGetPush(s => s
                        .SetTargetPath(x)
-                       .SetSource(GithubNugetFeed)
-                       .SetApiKey(GitHubActions.Token)
+                       .SetSource(GithubSourceUrlPackage)
+                       .SetApiKey(GitHubActions?.Token)
                        .EnableSkipDuplicate()
                    );
                });
