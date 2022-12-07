@@ -97,13 +97,14 @@ class Build : NukeBuild
     .Executes(async ()=>
     {
         
-         await Console.Out.WriteLineAsync($"Is Release     : {Configuration} ");
-         await Console.Out.WriteLineAsync($"Is PullRequest : {GitHubActions?.IsPullRequest} ");
-         await Console.Out.WriteLineAsync($"Is Development : {GitRepository.IsOnDevelopBranch()}");
-         await Console.Out.WriteLineAsync($"Is Master      : {GitRepository.IsOnMasterBranch()}");
-         await Console.Out.WriteLineAsync($"GitHubActions  : {GithubNugetFeed} ");
-         await Console.Out.WriteLineAsync($"Root      Dir  : {RootDirectory.ToString()} ");
-         await Console.Out.WriteLineAsync($"Artefacts Dir  : {ArtifactsDirectory.ToString()} ");
+         await Console.Out.WriteLineAsync($"Is Release       : {Configuration} ");
+         await Console.Out.WriteLineAsync($"Is PullRequest   : {GitHubActions?.IsPullRequest} ");
+         await Console.Out.WriteLineAsync($"Is Development   : {GitRepository.IsOnDevelopBranch()}");
+         await Console.Out.WriteLineAsync($"Is Master        : {GitRepository.IsOnMasterBranch()}");
+         await Console.Out.WriteLineAsync($"GitHub Source Pkg: {GithubNugetFeed} ");
+         await Console.Out.WriteLineAsync($"GitHub Token     : {GitHubActions.Token} ");     
+         await Console.Out.WriteLineAsync($"Root      Dir    : {RootDirectory.ToString()} ");
+         await Console.Out.WriteLineAsync($"Artefacts Dir    : {ArtifactsDirectory.ToString()} ");
     });
     Target Clean => _ => _
       .Description($"Cleaning Project.")
@@ -167,6 +168,7 @@ class Build : NukeBuild
        .OnlyWhenStatic(() => GitRepository.IsOnDevelopBranch() || GitHubActions.IsPullRequest)
        .Executes(() =>
        {
+           Console.Out.WriteLineAsync($"Publishing to Github for Development only.");
            GlobFiles(ArtifactsDirectory, ArtifactsType)
                .Where(x => !x.EndsWith(ExcludedArtifactsType))
                .ForEach(x =>
