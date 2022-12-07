@@ -106,9 +106,9 @@ class Build : NukeBuild
          await Console.Out.WriteLineAsync($"GitHub Token     : {GitHubActions?.Token} ");     
          await Console.Out.WriteLineAsync($"Root      Dir    : {RootDirectory.ToString()} ");
          await Console.Out.WriteLineAsync($"Artefacts Dir    : {ArtifactsDirectory.ToString()} ");
-         Log.Information("GitHub Token = {Token}", GitHubActions?.Token);
-         Log.Information("Branch = {Branch}", GitHubActions?.Ref);
-         Log.Information("Commit = {Commit}", GitHubActions?.Sha);
+         await Console.Out.WriteLineAsync($"GitHub           : { GitHubActions?.Token}");
+         await Console.Out.WriteLineAsync($"Branch           : {GitHubActions?.Ref}");
+         await Console.Out.WriteLineAsync($"Commit           : {GitHubActions?.Sha}");
         
     });
     Target Clean => _ => _
