@@ -51,7 +51,8 @@ jobs:
           MyGetApiKey: ${{ secrets.MY_GET_API_KEY }}
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/upload-artifact@v1
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+      - uses: actions/upload-artifact@v2
         with:
           name: .artifacts
           path: .artifacts

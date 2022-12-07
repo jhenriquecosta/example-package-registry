@@ -20,6 +20,7 @@ using Nuke.Common.ChangeLog;
 using System;
 using Octokit.Internal;
 using ParameterAttribute = Nuke.Common.ParameterAttribute;
+using Serilog;
 
 [GitHubActions("continuous",
 GitHubActionsImage.UbuntuLatest,
@@ -102,9 +103,13 @@ class Build : NukeBuild
          await Console.Out.WriteLineAsync($"Is Development   : {GitRepository.IsOnDevelopBranch()}");
          await Console.Out.WriteLineAsync($"Is Master        : {GitRepository.IsOnMasterBranch()}");
          await Console.Out.WriteLineAsync($"GitHub Source Pkg: {GithubNugetFeed} ");
-         await Console.Out.WriteLineAsync($"GitHub Token     : {GitHubActions.Token} ");     
+         await Console.Out.WriteLineAsync($"GitHub Token     : {GitHubActions?.Token} ");     
          await Console.Out.WriteLineAsync($"Root      Dir    : {RootDirectory.ToString()} ");
          await Console.Out.WriteLineAsync($"Artefacts Dir    : {ArtifactsDirectory.ToString()} ");
+         Log.Information("GitHub Token = {Token}", GitHubActions?.Token);
+         Log.Information("Branch = {Branch}", GitHubActions?.Ref);
+         Log.Information("Commit = {Commit}", GitHubActions?.Sha);
+        
     });
     Target Clean => _ => _
       .Description($"Cleaning Project.")
