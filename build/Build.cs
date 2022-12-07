@@ -173,11 +173,12 @@ class Build : NukeBuild
        .OnlyWhenStatic(() => GitRepository.IsOnDevelopBranch() || GitHubActions.IsPullRequest)
        .Executes(() =>
        {
-           Console.Out.WriteLineAsync($"Publishing to Github for Development only.");
+           Console.Out.WriteLineAsync($"Publishing...");
            GlobFiles(ArtifactsDirectory, ArtifactsType)
                .Where(x => !x.EndsWith(ExcludedArtifactsType))
                .ForEach(x =>
                {
+                   Console.Out.WriteLineAsync($"Package {x.ToString()} to {GithubNugetFeed}");
                    DotNetNuGetPush(s => s
                        .SetTargetPath(x)
                        .SetSource(GithubNugetFeed)
