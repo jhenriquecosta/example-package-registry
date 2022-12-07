@@ -92,9 +92,22 @@ class Build : NukeBuild
          ? $"https://nuget.pkg.github.com/{GitHubActions.RepositoryOwner}/index.json"
          : null;
 
-
+    Target Info => _ => _
+    .Description("Configures the build")
+    .Executes(async ()=>
+    {
+        
+         await Console.Out.WriteLineAsync($"Is Release     : {Configuration} ");
+         await Console.Out.WriteLineAsync($"Is PullRequest : {GitHubActions?.IsPullRequest} ");
+         await Console.Out.WriteLineAsync($"Is Development : {GitRepository.IsOnDevelopBranch()}");
+         await Console.Out.WriteLineAsync($"Is Master      : {GitRepository.IsOnMasterBranch()}");
+         await Console.Out.WriteLineAsync($"GitHubActions  : {GithubNugetFeed} ");
+         await Console.Out.WriteLineAsync($"Root      Dir  : {RootDirectory.ToString()} ");
+         await Console.Out.WriteLineAsync($"Artefacts Dir  : {ArtifactsDirectory.ToString()} ");
+    });
     Target Clean => _ => _
       .Description($"Cleaning Project.")
+      .DependsOn(Info) 
       .Before(Restore)
       .Executes(() =>
       {
@@ -212,6 +225,7 @@ class Build : NukeBuild
        .OnlyWhenStatic(() => GitRepository.IsOnMainOrMasterBranch() || GitRepository.IsOnReleaseBranch())
        .Executes(async () =>
        {
+           await Console.Out.WriteLineAsync($"Creating release for the publishable version.");
            var credentials = new Credentials(GitHubActions.Token);
            GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)),
                new InMemoryCredentialStore(credentials));
