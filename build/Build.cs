@@ -98,17 +98,19 @@ class Build : NukeBuild
     .Executes(async ()=>
     {
         
-         await Console.Out.WriteLineAsync($"Is Release       : {Configuration} ");
-         await Console.Out.WriteLineAsync($"Is PullRequest   : {GitHubActions?.IsPullRequest} ");
-         await Console.Out.WriteLineAsync($"Is Development   : {GitRepository.IsOnDevelopBranch()}");
-         await Console.Out.WriteLineAsync($"Is Master        : {GitRepository.IsOnMasterBranch()}");
-         await Console.Out.WriteLineAsync($"GitHub Source Pkg: {GithubNugetFeed} ");
-         await Console.Out.WriteLineAsync($"GitHub Token     : {GitHubActions?.Token} ");     
-         await Console.Out.WriteLineAsync($"Root      Dir    : {RootDirectory.ToString()} ");
-         await Console.Out.WriteLineAsync($"Artefacts Dir    : {ArtifactsDirectory.ToString()} ");
-         await Console.Out.WriteLineAsync($"GitHub           : { GitHubActions?.Token}");
-         await Console.Out.WriteLineAsync($"Branch           : {GitHubActions?.Ref}");
-         await Console.Out.WriteLineAsync($"Commit           : {GitHubActions?.Sha}");
+         await Console.Out.WriteLineAsync($"Is Release           : {Configuration} ");
+         await Console.Out.WriteLineAsync($"Is PullRequest       : {GitHubActions?.IsPullRequest} ");
+         await Console.Out.WriteLineAsync($"Is Development       : {GitRepository.IsOnDevelopBranch()}");
+         await Console.Out.WriteLineAsync($"Is Master            : {GitRepository.IsOnMasterBranch()}");
+         await Console.Out.WriteLineAsync($"GitHub Source Pkg    : {GithubNugetFeed} ");
+         await Console.Out.WriteLineAsync($"GitHub Token         : {GitHubActions?.Token} ");     
+         await Console.Out.WriteLineAsync($"Root      Dir        : {RootDirectory.ToString()} ");
+         await Console.Out.WriteLineAsync($"Artefacts Dir        : {ArtifactsDirectory.ToString()} ");
+         await Console.Out.WriteLineAsync($"ArtifactsType        : {ArtifactsType.ToString()} ");
+         await Console.Out.WriteLineAsync($"ExcludedArtifactsType: {ExcludedArtifactsType.ToString()} ");        
+         await Console.Out.WriteLineAsync($"GitHub               : { GitHubActions?.Token}");
+         await Console.Out.WriteLineAsync($"Branch               : {GitHubActions?.Ref}");
+         await Console.Out.WriteLineAsync($"Commit               : {GitHubActions?.Sha}");
         
     });
     Target Clean => _ => _
@@ -173,7 +175,7 @@ class Build : NukeBuild
        .OnlyWhenStatic(() => GitRepository.IsOnDevelopBranch() || GitHubActions.IsPullRequest)
        .Executes(() =>
        {
-           Console.Out.WriteLineAsync($"Publishing...");
+           Console.Out.WriteLineAsync($"Publishing from {ArtifactsDirectory} types {ArtifactsType} excluding {ExcludedArtifactsType} to GITHUB...");
            GlobFiles(ArtifactsDirectory, ArtifactsType)
                .Where(x => !x.EndsWith(ExcludedArtifactsType))
                .ForEach(x =>
